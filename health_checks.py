@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 
-# main libraries
-from dis import dis
-from email import message
 import os
 import shutil
 import sys
+import socket
+import psutil
 
 def check_reboot():
     """Returns True if computer has a pending reboot"""
@@ -29,12 +28,20 @@ def check_cpu_constrained():
 	"""Returns True if the cpu is having too much usage, False otherwise"""
 	return psutil.cpu_percent(1) > 75
 
+def check_no_network():
+	"""Returns True if it fails to resolve Google's URL, False otherwise"""
+	try:
+		socket.gethostbyname("www.google.com")
+		return False
+	except:
+		return True
+
 def main():
 	checks = [
 		(check_reboot,"Pending reboot"),
 		(check_root_full,"Root partion is full"),
 		(check_cpu_constrained,"CPU load too high."),
-		
+		(check_no_network,"No network is available"),
 	]
 	everything_ok = True
 	
