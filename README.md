@@ -1,7 +1,7 @@
-# health-checks
-
+# Simple Health Checks Using Python3
 Scripts that check the health of my computers
-This repo will be populated with lots of fancy checks.
-## Checks are:
+
+## Simple python functions that aid in checking systems:
 * Disk Usage
 * Reboot status
+* Internet connectivity Check
